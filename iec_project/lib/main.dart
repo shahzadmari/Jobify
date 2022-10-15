@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Jobify'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -40,18 +41,18 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
 
-    try {
-      final userCredential = await FirebaseAuth.instance.signInAnonymously();
-      print("Signed in with temporary account.");
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "operation-not-allowed":
-          print("Anonymous auth hasn't been enabled for this project.");
-          break;
-        default:
-          print("Unknown error.");
-      }
-    }
+    // try {
+    //   final userCredential = await FirebaseAuth.instance.signInAnonymously();
+    //   print("Signed in with temporary account.");
+    // } on FirebaseAuthException catch (e) {
+    //   switch (e.code) {
+    //     case "operation-not-allowed":
+    //       print("Anonymous auth hasn't been enabled for this project.");
+    //       break;
+    //     default:
+    //       print("Unknown error.");
+    //   }
+    // }
   }
 
   @override
