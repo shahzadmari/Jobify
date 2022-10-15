@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:iec_project/views/sign_in.dart';
+import 'package:iec_project/pages/sign_in.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
