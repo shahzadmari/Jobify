@@ -4,7 +4,7 @@ This is our 4th semester project of IEC supervised by Sir Adnan Pitafi and this 
 # Group members :
 ### * Shahzad Haider (Lead)
 ### * Eid Muhammad (UI/UX developer)
-### * Danish Anodher ( developer and logic builder)
+### * Danish Anodher ( Developer and logic builder)
 ### * Paras Soomro (Marketing Expert)
 
 # Technologies 
