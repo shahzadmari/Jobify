@@ -14,8 +14,6 @@ class Regiser extends StatefulWidget {
 class _RegiserState extends State<Regiser> {
   final TextEditingController _accountNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final AuthService _authService =
-      AuthService(firebaseAuth: FirebaseAuth.instance);
   bool loading = false;
   @override
   Widget build(BuildContext context) {
@@ -78,16 +76,16 @@ class _RegiserState extends State<Regiser> {
                   setState(() {
                     loading = true;
                   });
-                  User? result = await _authService.Singup(
-                      _accountNameController.text,
-                      _passwordController.text,
-                      context);
-                  if (result != null) {
-                    dialog('success', context);
-                    setState(() {
-                      loading = false;
-                    });
-                  }
+                  // User? result = await _authService.Singup(
+                  //     _accountNameController.text,
+                  //     _passwordController.text,
+                  //     context);
+                  // if (result != null) {
+                  //   dialog('success', context);
+                  //   setState(() {
+                  //     loading = false;
+                  //   });
+                  // }
                 },
                 child: loading
                     ? const CircularProgressIndicator()

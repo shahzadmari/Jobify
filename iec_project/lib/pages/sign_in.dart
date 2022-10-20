@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iec_project/controllers/auth_controller.dart';
+import 'package:iec_project/controllers/sign_in_controller.dart';
 import 'package:iec_project/pages/register_screen.dart';
 
 class SignIn extends StatefulWidget {
@@ -12,9 +13,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  SignInController signInController = SignInController();
+
   final TextEditingController _accountNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  Authcontroller acontroller = Authcontroller();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -117,16 +119,14 @@ class _SignInState extends State<SignIn> {
                                 InkWell(
                                   onTap: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        acontroller.login(
-                                            _passwordController.text,
-                                            _accountNameController.text,
-                                            context);
-                                      });
+                                      signInController.signIn(
+                                          _passwordController.text,
+                                          _accountNameController.text,
+                                          context);
                                     }
                                   },
                                   child: Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.black,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
