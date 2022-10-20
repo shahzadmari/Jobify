@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   //set timer in initsate so that splashScreen would navigate to sign in after 5 seconds
   void initState() {
-    // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 4), (() {
       Navigator.push(
