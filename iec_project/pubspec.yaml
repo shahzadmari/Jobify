@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^3.5.1
   flat_icons_flutter: ^1.0.2
   animated_text_kit: ^4.2.2
+  http: ^0.13.5
   
 
 dev_dependencies:

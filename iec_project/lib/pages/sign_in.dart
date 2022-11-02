@@ -18,6 +18,11 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _accountNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  void check(String email, String password, BuildContext context) {
+    signInController.signIn(email, password, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,10 +124,8 @@ class _SignInState extends State<SignIn> {
                                 InkWell(
                                   onTap: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      signInController.signIn(
-                                          _passwordController.text,
-                                          _accountNameController.text,
-                                          context);
+                                      check(_accountNameController.text,
+                                          _passwordController.text, context);
                                     }
                                   },
                                   child: Container(

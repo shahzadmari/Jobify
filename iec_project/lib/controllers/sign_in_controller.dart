@@ -13,15 +13,14 @@ class SignInController {
       UserCredential credential = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       user = credential.user;
-      if (user != null) {
-        dialog("SignIn Successful", context);
+      final result = user;
+      if (result != null) {
+        // dialog("SignIn Successful", context);
+        dialog("signed in ", context);
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        dialog(e.message!, context);
-      } else if (e.code == 'email-already-in-use') {
-        dialog(e.message!, context);
-      }
+      dialog(e.message!, context);
+      print(e.message);
     } catch (e) {
       print(e);
     }
