@@ -1,11 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:iec_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:iec_project/pages/company_posts.dart';

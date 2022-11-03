@@ -46,7 +46,26 @@ class _JobSeekersState extends State<JobSeekers> {
             SizedBox(
               height: 10,
             ),
-            Heading(value: "Job Seekers"),
+            // Heading(value: "Job Seekers"),
+            Row(
+              children: const [
+                Text(
+                  'Job',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  ' Seekers',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
             SizedBox(
               height: 20,
             ),
