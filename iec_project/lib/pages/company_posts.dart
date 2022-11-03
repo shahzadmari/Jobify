@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:iec_project/Widgets/header.dart';
 import 'package:iec_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:iec_project/utils/constants.dart';
 
 class Company extends StatefulWidget {
   const Company({super.key});
@@ -37,6 +38,16 @@ class _CompanyState extends State<Company> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showInformationDialog(context);
+        },
+        icon: const Icon(Icons.add),
+        label: const Text(
+          'create',
+        ),
+        backgroundColor: ColorConstants.UiColor,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -104,7 +115,7 @@ class _CompanyState extends State<Company> {
                                     Column(
                                       children: [
                                         Text(
-                                          "Next Generation",
+                                          "${snapshot.data![index].id}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18),

@@ -40,6 +40,9 @@ class _UserProfileState extends State<UserProfile> {
                 enabled: false,
                 initialValue: "Shahzad Haider",
                 decoration: InputDecoration(
+                    labelStyle: TextStyle(
+                      fontSize: 18,
+                    ),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color.fromARGB(255, 13, 71, 161), width: 2)),

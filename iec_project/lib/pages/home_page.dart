@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     JobSeekers(),
     Company(),
     UserProfile(),
+    // ("danish" == "danish") ?
     Center(child: Text("settings"))
   ];
   Future<List<UserModel>> getSupport() async {
