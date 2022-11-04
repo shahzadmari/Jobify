@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:iec_project/controllers/auth_controller.dart';
 import 'package:iec_project/controllers/sign_in_controller.dart';
-import 'package:iec_project/pages/register_screen.dart';
+import 'package:iec_project/pages/sign_up.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -26,7 +25,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: Colors.blueGrey[300],
       body: Form(
         key: _formKey,
         child: Center(
@@ -34,23 +33,23 @@ class _SignInState extends State<SignIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 40),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.blue[900],
-                  width: 150,
-                  height: 150,
-                  child: Image.asset("assets/talent-search.png"),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
+              // const SizedBox(height: 40),
+              // Expanded(
+              //   flex: 1,
+              //   child: Container(
+              //     color: Colors.blue[900],
+              //     width: 150,
+              //     height: 150,
+              //     child: Image.asset("assets/talent-search.png"),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 30,
+              // ),
               Expanded(
                 flex: 2,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(30),
@@ -61,15 +60,15 @@ class _SignInState extends State<SignIn> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Welcome Back",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
-                          Text(
+                          const Text(
                             "Name",
                             style: TextStyle(
                                 color: Colors.black,
@@ -133,9 +132,9 @@ class _SignInState extends State<SignIn> {
                                           color: Colors.black,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: const Text(
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Text(
                                           'Sign In',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -151,17 +150,17 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const Regiser()));
+                                                const SignUp()));
                                   },
                                   child: Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.black,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: const Text(
-                                          'Create',
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Text(
+                                          'Sign Up',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,
@@ -188,7 +187,7 @@ class _SignInState extends State<SignIn> {
                               ),
                               TextButton(
                                   onPressed: () {},
-                                  child: Text("Forget Password?"))
+                                  child: const Text("Forget Password?"))
                             ],
                           )
                         ],

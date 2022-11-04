@@ -1,18 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iec_project/Firebase/auth_Service.dart';
-import 'package:iec_project/utils/constants.dart';
 
-class Regiser extends StatefulWidget {
-  const Regiser({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Regiser> createState() => _RegiserState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _RegiserState extends State<Regiser> {
+class _SignUpState extends State<SignUp> {
   final TextEditingController _accountNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confrimPassword = TextEditingController();
@@ -28,7 +24,7 @@ class _RegiserState extends State<Regiser> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Expanded(
                   flex: 1,
                   child: Container(
@@ -38,13 +34,13 @@ class _RegiserState extends State<Regiser> {
                     child: Image.asset("assets/talent-search.png"),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Expanded(
                   flex: 2,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(30),
@@ -55,15 +51,15 @@ class _RegiserState extends State<Regiser> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Register",
+                              const Text(
+                                "Create Account",
                                 style: TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
-                              Text(
+                              const Text(
                                 "Name",
                                 style: TextStyle(
                                     color: Colors.black,
@@ -145,14 +141,14 @@ class _RegiserState extends State<Regiser> {
                                     }
                                   },
                                   child: Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.black,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(30))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: const Text(
-                                          'Register',
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Text(
+                                          'Sign Up',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,

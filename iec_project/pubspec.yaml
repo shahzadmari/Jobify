@@ -40,6 +40,7 @@ dependencies:
   flat_icons_flutter: ^1.0.2
   animated_text_kit: ^4.2.2
   http: ^0.13.5
+  get_storage: ^2.0.3
   
 
 dev_dependencies:

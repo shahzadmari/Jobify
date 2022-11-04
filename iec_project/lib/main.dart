@@ -1,49 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:iec_project/pages/company_posts.dart';
-import 'package:iec_project/pages/home_page.dart';
-import 'package:iec_project/pages/job_seekers.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:iec_project/pages/introduction.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/pages/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await GetStorage.init();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: isFirstTime() ? const IntroductionScreen() : const SignIn(),
       debugShowCheckedModeBanner: false,
     );
+    ;
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({Key? key, required this.title}) : super(key: key);
-//   final String title;
+bool isFirstTime() {
+  bool? firstTime = GetStorage().read('first_time');
 
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: const SignIn(),
-//     );
-//   }
-// }
+  if (firstTime == null || !firstTime) {
+    return true;
+  } else {
+    GetStorage().write('first_time', false);
+    return false;
+  }
+}

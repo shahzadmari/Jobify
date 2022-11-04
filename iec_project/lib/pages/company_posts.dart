@@ -1,9 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:iec_project/Widgets/header.dart';
 import 'package:iec_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:iec_project/utils/constants.dart';
@@ -40,7 +36,38 @@ class _CompanyState extends State<Company> {
         child: Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          showInformationDialog(context);
+          // showInformationDialog(context);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (ctx) {
+              return Container(
+                padding: const EdgeInsets.all(8.0),
+                height: MediaQuery.of(context).size.height * 0.7,
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Type Recruitment'),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                          hintText: "Start typing something..."),
+                      minLines:
+                          6, // any number you need (It works as the rows for the textarea)
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                    ),
+                    ElevatedButton(
+                      child: const Text('Close BottomSheet'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
         },
         icon: const Icon(Icons.add),
         label: const Text(
@@ -54,36 +81,51 @@ class _CompanyState extends State<Company> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Heading(value: "Companies"),
-            SizedBox(
+            Row(
+              children: const [
+                Text(
+                  'Companies',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
               height: 20,
             ),
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.grey[300],
-                        hintText: "Search here",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none)),
+                  child: SizedBox(
+                    height: 50,
+                    child: TextField(
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[300],
+                          hintText: "Search here",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide.none)),
+                    ),
                   ),
                 ),
                 IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                       size: 30,
                     ))
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Expanded(
@@ -116,19 +158,19 @@ class _CompanyState extends State<Company> {
                                       children: [
                                         Text(
                                           "${snapshot.data![index].id}",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18),
                                         ),
-                                        SizedBox(height: 10),
-                                        Text("nextgen@gmail.com"),
-                                        SizedBox(height: 10),
+                                        const SizedBox(height: 10),
+                                        const Text("nextgen@gmail.com"),
+                                        const SizedBox(height: 10),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text("2+y exp"),
-                                            Text(
+                                            const Text("2+y exp"),
+                                            const Text(
                                               " | ",
                                               style: TextStyle(
                                                   fontSize: 23,
