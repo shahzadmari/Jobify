@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iec_project/controllers/sign_in_controller.dart';
+import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/sign_up.dart';
 import 'package:iec_project/utils/gradients.dart';
 
@@ -18,13 +19,11 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   SignInController signInController = SignInController();
 
-  final TextEditingController _accountNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void check(String email, String password, BuildContext context) {
-    signInController.signIn(email, password, context);
-  }
+  bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +31,7 @@ class _SignInState extends State<SignIn> {
       // decoration: BoxDecoration(gradient: moonlitAestroid),
       decoration: BoxDecoration(gradient: gradeGrey),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         // backgroundColor: const Color(0xFF2C5364),
         body: SafeArea(
@@ -70,28 +70,55 @@ class _SignInState extends State<SignIn> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      CupertinoTextField(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 25,
-                        ),
-                        placeholder: "Email",
-                        cursorColor: const Color(0xFF203A43),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20.0),
                         decoration: BoxDecoration(
-                            color: const Color(0xFFEEF2F3),
-                            borderRadius: BorderRadius.circular(10)),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextFormField(
+                          controller: _emailController,
+                          decoration: const InputDecoration(
+                            labelText: "Email",
+                            labelStyle: TextStyle(color: Color(0xFF8E9EAB)),
+                            hintText: "yourEmail@email.com",
+                            border: InputBorder.none,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 20),
-                      CupertinoTextField(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                          horizontal: 25,
-                        ),
-                        placeholder: "Password",
-                        cursorColor: const Color(0xFF203A43),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20.0),
                         decoration: BoxDecoration(
-                            color: const Color(0xFFEEF2F3),
-                            borderRadius: BorderRadius.circular(10)),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: !_passwordVisible,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            labelStyle:
+                                const TextStyle(color: Color(0xFF8E9EAB)),
+                            hintText: "••••••••",
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              splashRadius: 10,
+                              icon: Icon(
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: const Color(0xFF8E9EAB),
+                                size: 20.0,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
                       ),
                       Align(
                         alignment: Alignment.centerRight,
@@ -116,7 +143,7 @@ class _SignInState extends State<SignIn> {
                             const BoxConstraints(minWidth: double.infinity),
                         child: CupertinoButton(
                           color: const Color(0xFF2C3E50),
-                          onPressed: () {},
+                          onPressed: () => _signIn(context),
                           child: const Padding(
                             padding: EdgeInsets.all(5.0),
                             child: Text("Sign In"),
@@ -168,7 +195,13 @@ class _SignInState extends State<SignIn> {
                             const BoxConstraints(minWidth: double.infinity),
                         child: CupertinoButton(
                           color: const Color(0xFF2C3E50),
-                          onPressed: () {},
+                          onPressed: () {
+                            signInController.googleSignIn(
+                              _emailController.text,
+                              _passwordController.text,
+                              context,
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
@@ -226,5 +259,22 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  _signIn(BuildContext context) async {
+    User? user = await signInController.signIn(
+      _emailController.text,
+      _passwordController.text,
+      context,
+    );
+
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    }
   }
 }
