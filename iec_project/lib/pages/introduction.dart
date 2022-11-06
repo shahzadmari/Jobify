@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iec_project/pages/sign_up.dart';
 import 'package:iec_project/utils/gradients.dart';
+import 'package:iec_project/utils/info_box.dart';
 
 import 'sign_in.dart';
 
@@ -13,12 +14,18 @@ class IntroductionScreen extends StatefulWidget {
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: moonlitAestroid,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Padding(

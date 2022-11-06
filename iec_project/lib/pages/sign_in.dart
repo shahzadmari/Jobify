@@ -9,6 +9,8 @@ import 'package:iec_project/utils/gradients.dart';
 
 import 'dart:math' as math;
 
+import 'package:iec_project/utils/info_box.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -78,6 +80,8 @@ class _SignInState extends State<SignIn> {
                         ),
                         child: TextFormField(
                           controller: _emailController,
+                          cursorColor: const Color(0xFF2C3E50),
+                          cursorWidth: 1.0,
                           decoration: const InputDecoration(
                             labelText: "Email",
                             labelStyle: TextStyle(color: Color(0xFF8E9EAB)),
@@ -96,6 +100,8 @@ class _SignInState extends State<SignIn> {
                         child: TextFormField(
                           controller: _passwordController,
                           obscureText: !_passwordVisible,
+                          cursorColor: const Color(0xFF2C3E50),
+                          cursorWidth: 1.0,
                           decoration: InputDecoration(
                             labelText: "Password",
                             labelStyle:
@@ -135,50 +141,34 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ConstrainedBox(
-                        constraints:
-                            const BoxConstraints(minWidth: double.infinity),
-                        child: CupertinoButton(
-                          color: const Color(0xFF2C3E50),
-                          onPressed: () => _signIn(context),
-                          child: const Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text("Sign In"),
-                          ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(minWidth: double.infinity),
+                      child: CupertinoButton(
+                        color: const Color(0xFF2C3E50),
+                        onPressed: () => _signIn(context),
+                        child: const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text("Sign In"),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 30.0,
-                          horizontal: 10.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Transform.rotate(
-                                angle: math.pi,
-                                child: Container(
-                                  height: 1,
-                                  decoration: BoxDecoration(
-                                    gradient: gradeGrey,
-                                    // color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            const Text(
-                              "Or continue with",
-                              style: TextStyle(
-                                color: Color(0xFF2C3E50),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 30.0,
+                        horizontal: 10.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Transform.rotate(
+                              angle: math.pi,
                               child: Container(
                                 height: 1,
                                 decoration: BoxDecoration(
@@ -187,37 +177,54 @@ class _SignInState extends State<SignIn> {
                                 ),
                               ),
                             ),
+                          ),
+                          const SizedBox(width: 20),
+                          const Text(
+                            "Or continue with",
+                            style: TextStyle(
+                              color: Color(0xFF2C3E50),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Container(
+                              height: 1,
+                              decoration: BoxDecoration(
+                                gradient: gradeGrey,
+                                // color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints(minWidth: double.infinity),
+                      child: CupertinoButton(
+                        color: const Color(0xFF2C3E50),
+                        onPressed: () {
+                          signInController.googleSignIn(
+                            _emailController.text,
+                            _passwordController.text,
+                            context,
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              "assets/google.png",
+                              scale: 2,
+                            ),
+                            const SizedBox(width: 20),
+                            const Text("Sign in with Google"),
                           ],
                         ),
                       ),
-                      ConstrainedBox(
-                        constraints:
-                            const BoxConstraints(minWidth: double.infinity),
-                        child: CupertinoButton(
-                          color: const Color(0xFF2C3E50),
-                          onPressed: () {
-                            signInController.googleSignIn(
-                              _emailController.text,
-                              _passwordController.text,
-                              context,
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                "assets/google.png",
-                                scale: 2,
-                              ),
-                              const SizedBox(width: 20),
-                              const Text("Sign in with Google"),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -266,6 +273,12 @@ class _SignInState extends State<SignIn> {
       _emailController.text,
       _passwordController.text,
       context,
+    );
+
+    InfoBox(
+      "Signed In Successfully",
+      context: context,
+      infoCategory: InfoCategory.success,
     );
 
     if (user != null) {
