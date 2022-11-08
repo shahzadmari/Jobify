@@ -42,7 +42,7 @@ class _CompanyState extends State<Company> {
             isScrollControlled: true,
             builder: (ctx) {
               return Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 height: MediaQuery.of(context).size.height * 0.7,
                 color: Colors.white,
                 child: Column(

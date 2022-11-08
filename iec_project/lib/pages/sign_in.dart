@@ -25,7 +25,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[300],
+      backgroundColor: Colors.blue[900],
       body: Form(
         key: _formKey,
         child: Center(
@@ -33,19 +33,18 @@ class _SignInState extends State<SignIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // const SizedBox(height: 40),
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //     color: Colors.blue[900],
-              //     width: 150,
-              //     height: 150,
-              //     child: Image.asset("assets/talent-search.png"),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  color: Colors.blue[900],
+                  width: 150,
+                  height: 150,
+                  child: Image.asset("assets/talent-search.png"),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               Expanded(
                 flex: 2,
                 child: Container(

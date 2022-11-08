@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/pages/introduction.dart';
 import 'package:iec_project/pages/sign_in.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,8 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 4), (() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const SignIn()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const IntroductionScreen()));
     }));
   }
 

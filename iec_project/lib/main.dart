@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/introduction.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/pages/splash_screen.dart';
