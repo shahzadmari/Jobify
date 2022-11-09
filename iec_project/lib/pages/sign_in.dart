@@ -29,46 +29,64 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueGrey[300],
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // const SizedBox(height: 40),
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //     color: Colors.blue[900],
-              //     width: 150,
-              //     height: 150,
-              //     child: Image.asset("assets/talent-search.png"),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(30),
-                          topLeft: Radius.circular(30))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Welcome Back",
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+    return Container(
+      // decoration: BoxDecoration(gradient: moonlitAestroid),
+      decoration: BoxDecoration(gradient: gradeGrey),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        // backgroundColor: const Color(0xFF2C5364),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: const [
+                    Text(
+                      "Hello Again!",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 50.0, vertical: 10.0),
+                      child: Text(
+                        "Welcome back you've been missed!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextFormField(
+                          controller: _emailController,
+                          cursorColor: const Color(0xFF2C3E50),
+                          cursorWidth: 1.0,
+                          decoration: const InputDecoration(
+                            labelText: "Email",
+                            labelStyle: TextStyle(color: Color(0xFF8E9EAB)),
+                            hintText: "yourEmail@email.com",
+                            border: InputBorder.none,
                           ),
                         ),
                       ),
