@@ -7,17 +7,32 @@ class SignInController {
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  Future<void> signIn(
+  Future<User?> signIn(
       String email, String password, BuildContext context) async {
     try {
       UserCredential credential = await firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       user = credential.user;
       final result = user;
       if (result != null) {
         // dialog("SignIn Successful", context);
         dialog("signed in ", context);
       }
+    } on FirebaseAuthException catch (e) {
+      dialog(e.message!, context);
+      print(e.message);
+    } catch (e) {
+      print(e);
+    }
+    return user;
+  }
+
+  Future<void> googleSignIn(
+      String email, String password, BuildContext context) async {
+    try {
+      //TODO: Google Sign In
     } on FirebaseAuthException catch (e) {
       dialog(e.message!, context);
       print(e.message);
