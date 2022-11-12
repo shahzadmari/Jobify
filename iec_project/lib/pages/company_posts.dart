@@ -50,14 +50,33 @@ class _CompanyState extends State<Company> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Text('Type Recruitment'),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          hintText: "Start typing something..."),
-                      minLines:
-                          6, // any number you need (It works as the rows for the textarea)
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
+                    const Text(
+                      'Post',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10.0),
+                    Container(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border:
+                            Border.all(color: Color(0xFFABBAAB), width: 1.0),
+                      ),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: "Start typing...",
+                          border: InputBorder.none,
+                        ),
+                        minLines:
+                            6, // any number you need (It works as the rows for the textarea)
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        cursorColor: const Color(0xFF2C3E50),
+                        cursorWidth: 1.0,
+                      ),
                     ),
                     ElevatedButton(
                       child: const Text('Close BottomSheet'),

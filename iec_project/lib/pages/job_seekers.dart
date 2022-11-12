@@ -39,47 +39,19 @@ class _JobSeekersState extends State<JobSeekers> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
+        title: _isSearching ? _buildSearchField() : _buildTitle(context),
         elevation: 0.0,
         titleSpacing: 0.0,
         leading: _isSearching ? const BackButton(color: Colors.black) : null,
-        title: _isSearching ? _buildSearchField() : _buildTitle(context),
         actions: _buildActions(),
         backgroundColor: Colors.white,
         actionsIconTheme: const IconThemeData(color: Colors.black),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // const SizedBox(
-          //   height: 20,
-          // ),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: TextField(
-          //         style: const TextStyle(
-          //             fontSize: 15, fontWeight: FontWeight.bold),
-          //         decoration: InputDecoration(
-          //             filled: true,
-          //             fillColor: Colors.grey[300],
-          //             hintText: "Search here",
-          //             border: OutlineInputBorder(
-          //                 borderRadius: BorderRadius.circular(30),
-          //                 borderSide: BorderSide.none)),
-          //       ),
-          //     ),
-          //     IconButton(
-          //         onPressed: () {},
-          //         icon: const Icon(
-          //           Icons.search,
-          //           size: 30,
-          //         ))
-          //   ],
-          // ),
-          // const SizedBox(
-          //   height: 15,
-          // ),
           Expanded(
               child: FutureBuilder(
                   future: getSupport(),

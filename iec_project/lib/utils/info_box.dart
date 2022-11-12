@@ -7,10 +7,6 @@ class InfoBox {
   BuildContext context;
   InfoCategory? infoCategory;
 
-  // InfoBox(this.text, {required this.context, this.infoCategory}) {
-  //   _show();
-  // }
-
   InfoBox(this.text, {required this.context, this.infoCategory}) {
     _show();
   }

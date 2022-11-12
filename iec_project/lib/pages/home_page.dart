@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           data: NavigationBarThemeData(
               indicatorColor: Colors.blue.shade300,
               labelTextStyle: MaterialStateProperty.all(
-                  TextStyle(fontSize: 15, color: Colors.white))),
+                  const TextStyle(fontSize: 15, color: Colors.white))),
           child: NavigationBar(
               backgroundColor: Colors.blue[900],
               selectedIndex: index,
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                   this.index = index;
                 });
               },
-              destinations: [
+              destinations: const [
                 NavigationDestination(
                     icon: Icon(
                       Icons.person,

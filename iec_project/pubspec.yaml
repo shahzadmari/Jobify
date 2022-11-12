@@ -41,6 +41,8 @@ dependencies:
   animated_text_kit: ^4.2.2
   http: ^0.13.5
   get_storage: ^2.0.3
+  image_picker: ^0.8.6
+  image_cropper: ^3.0.1
   
 
 dev_dependencies:
