@@ -48,14 +48,14 @@ class InfoBox {
       SnackBar(
         content: Text(
           text!,
-          style: const TextStyle(
-            // color: color,
-            color: Color(0xFF203A43),
+          style: TextStyle(
+            color: color,
+            // color: Color(0xFF203A43),
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: color,
-        // backgroundColor: const Color(0xFF203A43),
+        // backgroundColor: color,
+        backgroundColor: const Color(0xFF203A43),
       ),
     );
   }
