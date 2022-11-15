@@ -16,7 +16,7 @@ class SignUpController {
       final result = user;
       if (result != null) {
         // dialog("SignIn Successful", context);
-        dialog("signed in ", context);
+        dialog("registered user ", context);
       }
     } on FirebaseAuthException catch (e) {
       dialog(e.message!, context);

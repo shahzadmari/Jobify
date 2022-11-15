@@ -275,11 +275,11 @@ class _SignInState extends State<SignIn> {
       context,
     );
 
-    InfoBox(
-      "Signed In Successfully",
-      context: context,
-      infoCategory: InfoCategory.success,
-    );
+    // InfoBox(
+    //   "Signed In Successfully",
+    //   context: context,
+    //   infoCategory: InfoCategory.success,
+    // );
 
     if (user != null) {
       Navigator.push(

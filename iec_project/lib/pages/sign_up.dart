@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/controllers/sign_up_controller.dart';
@@ -250,11 +251,14 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  _signUp(BuildContext context) {
-    InfoBox(
-      "Signed Up Successfully",
-      context: context,
-      infoCategory: InfoCategory.success,
-    );
+  _signUp(BuildContext context) async {
+    final user = await signUpController.signUp(
+        _emailController.text, _passwordController.text, context);
+
+    // InfoBox(
+    //   "Signed Up Successfully",
+    //   context: context,
+    //   infoCategory: InfoCategory.success,
+    // );
   }
 }

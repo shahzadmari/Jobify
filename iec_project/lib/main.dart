@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: ScreenDecider(),
       debugShowCheckedModeBanner: false,
     );
     ;
