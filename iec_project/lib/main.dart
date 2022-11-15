@@ -3,8 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/introduction.dart';
+import 'package:iec_project/pages/screen_decider.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/pages/splash_screen.dart';
+import 'package:iec_project/pages/user_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +36,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: isFirstTime() ? const IntroductionScreen() : const SignIn(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
     ;

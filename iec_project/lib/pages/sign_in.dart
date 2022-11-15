@@ -275,21 +275,19 @@ class _SignInState extends State<SignIn> {
       context,
     );
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
+    InfoBox(
+      "Signed In Successfully",
+      context: context,
+      infoCategory: InfoCategory.success,
     );
 
-    //TODO: AuthChanges.. Screen Decider
-    // if (user != null) {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => const HomePage(),
-    //     ),
-    //   );
-    // }
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+    }
   }
 }

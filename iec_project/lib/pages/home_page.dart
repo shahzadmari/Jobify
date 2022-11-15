@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/controllers/signOut_controller.dart';
 import 'package:iec_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:iec_project/pages/company_posts.dart';
 import 'package:iec_project/pages/job_seekers.dart';
+import 'package:iec_project/pages/settings.dart';
 import 'package:iec_project/pages/user_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     Company(),
     UserProfile(),
     // ("danish" == "danish") ?
-    Center(child: Text("settings"))
+    Settings()
   ];
   Future<List<UserModel>> getSupport() async {
     final response = await http
