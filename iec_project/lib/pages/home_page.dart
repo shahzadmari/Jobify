@@ -50,18 +50,20 @@ class _HomePageState extends State<HomePage> {
         body: screens[index],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
-              indicatorColor: Colors.blue.shade300,
+              // indicatorColor: Colors.blue.shade300,
+              indicatorColor: const Color(0xFF2C5364),
               labelTextStyle: MaterialStateProperty.all(
-                  TextStyle(fontSize: 15, color: Colors.white))),
+                  const TextStyle(fontSize: 15, color: Colors.white))),
           child: NavigationBar(
-              backgroundColor: Colors.blue[900],
+              // backgroundColor: Colors.blue[900],
+              backgroundColor: const Color(0xFF203A43),
               selectedIndex: index,
               onDestinationSelected: (index) {
                 setState(() {
                   this.index = index;
                 });
               },
-              destinations: [
+              destinations: const [
                 NavigationDestination(
                     icon: Icon(
                       Icons.person,

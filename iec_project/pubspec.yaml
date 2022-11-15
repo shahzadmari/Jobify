@@ -41,7 +41,12 @@ dependencies:
   animated_text_kit: ^4.2.2
   http: ^0.13.5
   get_storage: ^2.0.3
+<<<<<<< HEAD
   dropdown_textfield: ^1.0.6
+=======
+  image_picker: ^0.8.6
+  image_cropper: ^3.0.1
+>>>>>>> 5338f56f4e67c3a9d6af84e31286fbbe568678af
   
 
 dev_dependencies:
