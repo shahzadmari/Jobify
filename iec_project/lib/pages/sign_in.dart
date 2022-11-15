@@ -281,13 +281,13 @@ class _SignInState extends State<SignIn> {
       infoCategory: InfoCategory.success,
     );
 
-    if (user != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-    }
-  }
+  //   if (user != null) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => const HomePage(),
+  //       ),
+  //     );
+  //   }
+   }
 }

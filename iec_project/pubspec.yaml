@@ -41,6 +41,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   http: ^0.13.5
   get_storage: ^2.0.3
+  dropdown_textfield: ^1.0.6
   
 
 dev_dependencies:
