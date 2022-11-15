@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:iec_project/Widgets/user_optionCards.dart';
 import 'package:iec_project/pages/company_posts.dart';
+import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/job_seekers.dart';
 import 'package:iec_project/pages/seeker_bio.dart';
 import 'package:iec_project/pages/sign_in.dart';
@@ -48,7 +49,20 @@ class UserOptions extends StatelessWidget {
                 text: "Looking for a job? what are you waiting for?",
                 icon: CupertinoIcons.search_circle_fill,
                 WidgetPage: SeekerBio(),
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => HomePage())));
+                },
+                child: const Chip(
+                  avatar: Icon(Icons.move_up),
+                  label: Text("Visit as guest"),
+                ),
+              ),
             ],
           ),
         ),

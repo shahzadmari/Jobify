@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/introduction.dart';
 import 'package:iec_project/pages/splash_screen.dart';
+import 'package:iec_project/pages/user_options.dart';
 
 class ScreenDecider extends StatelessWidget {
   const ScreenDecider({super.key});
@@ -23,7 +24,7 @@ class ScreenDecider extends StatelessWidget {
           }
 
           if (snapshot.hasData) {
-            return HomePage();
+            return UserOptions();
           } else {
             return SplashScreen();
           }
