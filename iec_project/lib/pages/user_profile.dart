@@ -162,7 +162,7 @@ class _UserProfileState extends State<UserProfile> {
                               padding: EdgeInsets.all(2.0),
                               child: Icon(
                                 Icons.add_a_photo,
-                                size: 18,
+                                size: 20,
                                 color: Colors.black,
                               ),
                             ),
@@ -239,23 +239,6 @@ class _UserProfileState extends State<UserProfile> {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              //   child: TextFormField(
-              //     enabled: false,
-              //     initialValue: "Shahzad Haider",
-              //     decoration: const InputDecoration(
-              //         labelStyle: TextStyle(
-              //           fontSize: 18,
-              //         ),
-              //         border: OutlineInputBorder(
-              //           borderSide: BorderSide(
-              //               color: Color.fromARGB(255, 13, 71, 161), width: 2),
-              //         ),
-              //         labelText: "name"),
-              //   ),
-              // ),
             ],
           ),
         ));
@@ -302,11 +285,11 @@ class _UserProfileState extends State<UserProfile> {
         );
       },
       child: Container(
-        width: 300,
+        width: 250,
         padding: const EdgeInsets.all(10.0),
         margin: const EdgeInsets.only(right: 10.0),
         decoration: BoxDecoration(
-          color: Color(0xFF2C5364),
+          color: const Color(0xFF2C5364),
           borderRadius: BorderRadius.circular(10),
         ),
         child: const Text(
