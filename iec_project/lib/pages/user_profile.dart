@@ -310,11 +310,6 @@ class _UserProfileState extends State<UserProfile> {
         GestureDetector(
           onTap: () {
             _addSkill();
-            InfoBox(
-              "Skill Added Succefully",
-              context: context,
-              infoCategory: InfoCategory.success,
-            );
           },
           child: const Chip(
             avatar: Icon(Icons.add),
@@ -402,6 +397,11 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       );
                       _skillNameController.text = "";
+                      InfoBox(
+                        "Skill Added Succefully",
+                        context: context,
+                        infoCategory: InfoCategory.success,
+                      );
                     });
                     Navigator.pop(ctx);
                   },
