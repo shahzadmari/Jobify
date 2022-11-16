@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:iec_project/utils/info_box.dart';
@@ -17,7 +18,7 @@ class _UserProfileState extends State<UserProfile> {
 
   List<Widget> _skills = [];
 
-  var _skillNameController;
+  TextEditingController _skillNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -306,7 +307,6 @@ class _UserProfileState extends State<UserProfile> {
     return Wrap(
       spacing: 10.0,
       children: [
-        ..._skills,
         GestureDetector(
           onTap: () {
             _addSkill();
@@ -321,6 +321,7 @@ class _UserProfileState extends State<UserProfile> {
             label: Text("Add Skill"),
           ),
         ),
+        ..._skills,
       ],
     );
   }
@@ -391,17 +392,18 @@ class _UserProfileState extends State<UserProfile> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                   ),
-                  child: const Text('Create'),
+                  child: const Text('Add'),
                   onPressed: () {
-                    // if (_accountNameController.text.isEmpty) {
-                    //   return;
-                    // }
-                    // Navigator.pop(context);
-                    // setState(() {
-                    //   accountsController.createAccount(
-                    //       _accountNameController.text.capitalize());
-                    // });
-                    // _accountNameController.text = "";
+                    setState(() {
+                      _skills.add(
+                        Chip(
+                          label: Text(_skillNameController.text),
+                          backgroundColor: Color(Random().nextInt(0xffffffff)),
+                        ),
+                      );
+                      _skillNameController.text = "";
+                    });
+                    Navigator.pop(ctx);
                   },
                 ),
               ),
