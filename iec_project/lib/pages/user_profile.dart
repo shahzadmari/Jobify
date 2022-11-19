@@ -5,10 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/controllers/auth_controller.dart';
 import 'package:iec_project/pages/add_achievement.dart';
 import 'package:iec_project/utils/info_box.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -308,7 +310,8 @@ class _UserProfileState extends State<UserProfile> {
     });
 
     // FirebaseStorage.instance.;
-    // FirebaseAuth.instance.currentUser!.updatePhotoURL();
+    FirebaseAuth.instance.currentUser!
+        .updatePhotoURL(await uploadImage(_image!));
   }
 
   Widget _achievementCard() {

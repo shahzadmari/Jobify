@@ -15,3 +15,17 @@
 //     }
 //   }
 // }
+
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+
+Future<String> uploadImage(File _image) async {
+  String url;
+  String imgId = DateTime.now().microsecondsSinceEpoch.toString();
+  //reference to firebase storage
+  Reference ref = FirebaseStorage.instance.ref().child("users$imgId");
+  await ref.putFile(_image);
+  url = await ref.getDownloadURL();
+  return url;
+}
