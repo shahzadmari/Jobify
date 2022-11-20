@@ -8,13 +8,15 @@ class SignUpController {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future<void> signUp(
-      String email, String password, BuildContext context) async {
+      String name, String email, String password, BuildContext context) async {
     try {
       UserCredential credential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       user = credential.user;
-      final result = user;
-      if (result != null) {
+
+      user!.updateDisplayName(name);
+
+      if (user != null) {
         // dialog("SignIn Successful", context);
         dialog("registered user ", context);
       }

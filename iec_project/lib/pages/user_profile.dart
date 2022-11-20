@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/pages/add_achievement.dart';
@@ -183,9 +184,10 @@ class _UserProfileState extends State<UserProfile> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Danish Anodher",
-                              style: TextStyle(
+                            Text(
+                              // "Danish Anodher",
+                              FirebaseAuth.instance.currentUser!.displayName!,
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -304,6 +306,9 @@ class _UserProfileState extends State<UserProfile> {
     setState(() {
       _image = File(croppedFile!.path);
     });
+
+    // FirebaseStorage.instance.;
+    // FirebaseAuth.instance.currentUser!.updatePhotoURL();
   }
 
   Widget _achievementCard() {

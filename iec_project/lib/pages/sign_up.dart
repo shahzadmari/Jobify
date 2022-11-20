@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/controllers/sign_up_controller.dart';
+import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/utils/gradients.dart';
 
 import 'dart:math' as math;
@@ -16,6 +17,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confrimPassword = TextEditingController();
@@ -71,6 +73,25 @@ class _SignUpState extends State<SignUp> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextFormField(
+                          controller: _nameController,
+                          cursorColor: const Color(0xFF2C3E50),
+                          cursorWidth: 1.0,
+                          decoration: const InputDecoration(
+                            labelText: "Name",
+                            labelStyle: TextStyle(color: Color(0xFF8E9EAB)),
+                            hintText: "e.g Mark ZingerBurger",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
                       Container(
                         padding: const EdgeInsets.only(left: 20.0),
                         decoration: BoxDecoration(
@@ -202,7 +223,7 @@ class _SignUpState extends State<SignUp> {
                               scale: 2,
                             ),
                             const SizedBox(width: 20),
-                            const Text("Continue with Google"),
+                            const Text("Google SignIn"),
                           ],
                         ),
                       ),
@@ -213,7 +234,7 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Not a member?',
+                      'Already a member?',
                       style: TextStyle(
                         color: Color(0xFF2C3E50),
                       ),
@@ -226,13 +247,13 @@ class _SignUpState extends State<SignUp> {
                           () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignUp(),
+                              builder: (context) => const SignIn(),
                             ),
                           ),
                         );
                       },
                       child: const Text(
-                        "Register Now",
+                        "SignIn here",
                         style: TextStyle(
                           color: Colors.blue,
                           // color: Color(0xFF2C3E50),
@@ -253,7 +274,11 @@ class _SignUpState extends State<SignUp> {
 
   _signUp(BuildContext context) async {
     final user = await signUpController.signUp(
-        _emailController.text, _passwordController.text, context);
+      _nameController.text,
+      _emailController.text,
+      _passwordController.text,
+      context,
+    );
 
     // InfoBox(
     //   "Signed Up Successfully",
