@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/pages/add_achievement.dart';
 import 'package:iec_project/utils/info_box.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +20,7 @@ class _UserProfileState extends State<UserProfile> {
   File? _image;
 
   List<Widget> _skills = [];
+  List<Map<String, dynamic>> _achievementCards = [];
 
   TextEditingController _skillNameController = TextEditingController();
 
@@ -177,19 +181,20 @@ class _UserProfileState extends State<UserProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
                               "Danish Anodher",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 5.0),
+                            const SizedBox(height: 5.0),
                             Text(
-                              "danishkh253@gmail.com",
-                              style: TextStyle(
+                              // "danishkh253@gmail.com",
+                              FirebaseAuth.instance.currentUser!.email!,
+                              style: const TextStyle(
                                 fontSize: 13,
                               ),
                             ),
@@ -229,13 +234,38 @@ class _UserProfileState extends State<UserProfile> {
                     const SizedBox(height: 10.0),
                     Container(
                       height: 200,
-                      child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (ctx, index) {
-                          return _achievementCard();
-                        },
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          width: 1.0,
+                          color: Colors.grey,
+                        ),
                       ),
+                      child: _achievementCards.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: _achievementCards.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (ctx, index) {
+                                return _achievementCard();
+                              },
+                            )
+                          : Center(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF203A43),
+                                ),
+                                child: const Text(
+                                  "Add Achievement",
+                                  style: TextStyle(fontSize: 13),
+                                ),
+                                onPressed: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => const AddAchievement(),
+                                  ),
+                                ),
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -304,20 +334,27 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Widget _skillChips() {
-    return Wrap(
-      spacing: 10.0,
-      children: [
-        GestureDetector(
-          onTap: () {
-            _addSkill();
-          },
-          child: const Chip(
-            avatar: Icon(Icons.add),
-            label: Text("Add Skill"),
+    return LimitedBox(
+      maxHeight: 175,
+      child: ListView(
+        children: [
+          Wrap(
+            spacing: 10.0,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  _addSkill();
+                },
+                child: const Chip(
+                  avatar: Icon(Icons.add),
+                  label: Text("Add Skill"),
+                ),
+              ),
+              ..._skills,
+            ],
           ),
-        ),
-        ..._skills,
-      ],
+        ],
+      ),
     );
   }
 
@@ -328,7 +365,7 @@ class _UserProfileState extends State<UserProfile> {
         content: Wrap(
           children: [
             const Text(
-              'ACCOUNT NAME',
+              'Skill Name',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             TextField(
