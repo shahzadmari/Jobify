@@ -10,7 +10,6 @@ import 'package:iec_project/pages/add_achievement.dart';
 import 'package:iec_project/utils/info_box.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -103,8 +102,7 @@ class _UserProfileState extends State<UserProfile> {
                         },
                         child: CircleAvatar(
                           radius: 50,
-                          foregroundImage:
-                              _image != null ? FileImage(_image!) : null,
+                          foregroundImage: _profilePicture(),
                           backgroundColor: const Color(0xFF2C5364),
                           child: const Icon(
                             Icons.supervised_user_circle,
@@ -309,9 +307,9 @@ class _UserProfileState extends State<UserProfile> {
       _image = File(croppedFile!.path);
     });
 
-    // FirebaseStorage.instance.;
-    FirebaseAuth.instance.currentUser!
-        .updatePhotoURL(await uploadImage(_image!));
+    FirebaseAuth.instance.currentUser!.updatePhotoURL(
+      await uploadImage(_image!),
+    );
   }
 
   Widget _achievementCard() {
@@ -457,6 +455,17 @@ class _UserProfileState extends State<UserProfile> {
         ],
       ),
     );
+  }
+
+  _profilePicture() {
+    if (FirebaseAuth.instance.currentUser!.photoURL != null &&
+        FirebaseAuth.instance.currentUser!.photoURL!.isNotEmpty) {
+      return NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!);
+    } else if (_image != null) {
+      return FileImage(_image!);
+    } else {
+      return null;
+    }
   }
 }
 
