@@ -7,7 +7,7 @@ import 'package:iec_project/pages/screen_decider.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/pages/splash_screen.dart';
 import 'package:iec_project/pages/user_options.dart';
-
+// hahahahahhahahhahhahah
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
