@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iec_project/controllers/sign_up_controller.dart';
+import 'package:iec_project/controllers/auth_controller.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/utils/gradients.dart';
 
@@ -23,7 +23,6 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _confrimPassword = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  SignUpController signUpController = SignUpController();
   bool _passwordVisible = false;
 
   @override
@@ -89,6 +88,15 @@ class _SignUpState extends State<SignUp> {
                             hintText: "e.g Mark ZingerBurger",
                             border: InputBorder.none,
                           ),
+                          onChanged: (value) {
+                            FirebaseAuth.instance.currentUser!
+                                .updateDisplayName(value);
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter the Name";
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(height: 20.0),
@@ -108,6 +116,17 @@ class _SignUpState extends State<SignUp> {
                             hintText: "yourEmail@email.com",
                             border: InputBorder.none,
                           ),
+                          onChanged: (value) {
+                            FirebaseAuth.instance.currentUser!
+                                .updateEmail(value);
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter the email";
+                            } else if (value.contains('@') == false) {
+                              return "invalid email";
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -144,6 +163,13 @@ class _SignUpState extends State<SignUp> {
                               },
                             ),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter the password";
+                            } else if (value.length < 6) {
+                              return "password should be at least 6 char";
+                            }
+                          },
                         ),
                       ),
                     ],
@@ -156,7 +182,10 @@ class _SignUpState extends State<SignUp> {
                           const BoxConstraints(minWidth: double.infinity),
                       child: CupertinoButton(
                         color: const Color(0xFF2C3E50),
-                        onPressed: () => _signUp(context),
+                        onPressed: () {
+                          Authcontroller.instance.signUp(_nameController.text,
+                              _emailController.text, _passwordController.text);
+                        },
                         child: const Padding(
                           padding: EdgeInsets.all(5.0),
                           child: Text("Sign Up"),
@@ -272,18 +301,10 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  _signUp(BuildContext context) async {
-    final user = await signUpController.signUp(
-      _nameController.text,
-      _emailController.text,
-      _passwordController.text,
-      context,
-    );
+  // InfoBox(
+  //   "Signed Up Successfully",
+  //   context: context,
+  //   infoCategory: InfoCategory.success,
+  // );
 
-    // InfoBox(
-    //   "Signed Up Successfully",
-    //   context: context,
-    //   infoCategory: InfoCategory.success,
-    // );
-  }
 }

@@ -278,38 +278,38 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   _imagePicker(_ImagePicker ip) async {
-    final ImagePicker _picker = ImagePicker();
-    XFile? img;
+    // final ImagePicker _picker = ImagePicker();
+    // XFile? img;
 
-    switch (ip) {
-      case _ImagePicker.camera:
-        img = await _picker.pickImage(source: ImageSource.camera);
-        break;
-      case _ImagePicker.gallery:
-        img = await _picker.pickImage(source: ImageSource.gallery);
-        break;
-    }
+    // switch (ip) {
+    //   case _ImagePicker.camera:
+    //     img = await _picker.pickImage(source: ImageSource.camera);
+    //     break;
+    //   case _ImagePicker.gallery:
+    //     img = await _picker.pickImage(source: ImageSource.gallery);
+    //     break;
+    // }
 
-    CroppedFile? croppedFile = await ImageCropper().cropImage(
-      sourcePath: img!.path,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-      ],
-      uiSettings: [
-        AndroidUiSettings(
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false,
-        ),
-      ],
-    );
+    // CroppedFile? croppedFile = await ImageCropper().cropImage(
+    //   sourcePath: img!.path,
+    //   aspectRatioPresets: [
+    //     CropAspectRatioPreset.square,
+    //   ],
+    //   uiSettings: [
+    //     AndroidUiSettings(
+    //       initAspectRatio: CropAspectRatioPreset.original,
+    //       lockAspectRatio: false,
+    //     ),
+    //   ],
+    // );
 
-    setState(() {
-      _image = File(croppedFile!.path);
-    });
+    // setState(() {
+    //   _image = File(croppedFile!.path);
+    // });
 
-    FirebaseAuth.instance.currentUser!.updatePhotoURL(
-      await uploadImage(_image!),
-    );
+    // FirebaseAuth.instance.currentUser!.updatePhotoURL(
+    //   await uploadImage(_image!),
+    // );
   }
 
   Widget _achievementCard() {

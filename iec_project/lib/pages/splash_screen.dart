@@ -6,6 +6,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/pages/introduction.dart';
 import 'package:iec_project/pages/sign_in.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,8 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 4), (() {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const IntroductionScreen()));
+      Get.offAll(IntroductionScreen());
     }));
   }
 
@@ -52,25 +52,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
 //this widget contains the animated text kit which supposed to animate the text
 //to use this add dependency flutter pub add animated_text_kit
-class textAnimation extends StatelessWidget {
+class textAnimation extends StatefulWidget {
   final text1, text2, text3;
   const textAnimation({super.key, this.text1, this.text2, this.text3});
 
   @override
+  State<textAnimation> createState() => _textAnimationState();
+}
+
+class _textAnimationState extends State<textAnimation> {
+  @override
   Widget build(BuildContext context) {
     return AnimatedTextKit(animatedTexts: [
       TypewriterAnimatedText(
-        text1,
+        widget.text1,
         textStyle: const TextStyle(
             fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.white),
       ),
       TypewriterAnimatedText(
-        text2,
+        widget.text2,
         textStyle: const TextStyle(
             fontSize: 32, fontFamily: 'Canterbury', color: Colors.white),
       ),
       TypewriterAnimatedText(
-        text3,
+        widget.text3,
         textStyle: const TextStyle(
             fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.white),
       ),

@@ -52,17 +52,7 @@ class UserOptions extends StatelessWidget {
               ),
               SizedBox(
                 height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => HomePage())));
-                },
-                child: const Chip(
-                  avatar: Icon(Icons.move_up),
-                  label: Text("Visit as guest"),
-                ),
-              ),
+              )
             ],
           ),
         ),

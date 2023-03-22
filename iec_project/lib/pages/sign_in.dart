@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/controllers/auth_controller.dart';
+import 'package:get/get.dart';
 
-import 'package:iec_project/controllers/sign_in_controller.dart';
 import 'package:iec_project/pages/home_page.dart';
 import 'package:iec_project/pages/sign_up.dart';
 import 'package:iec_project/utils/gradients.dart';
@@ -19,8 +20,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  SignInController signInController = SignInController();
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -88,6 +87,13 @@ class _SignInState extends State<SignIn> {
                             hintText: "yourEmail@email.com",
                             border: InputBorder.none,
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter email";
+                            } else if (value.contains('@') == false) {
+                              return "return invalid email";
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -124,6 +130,13 @@ class _SignInState extends State<SignIn> {
                               },
                             ),
                           ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter the password";
+                            } else if (value.length < 6) {
+                              return "password should be at least 6 char";
+                            }
+                          },
                         ),
                       ),
                       Align(
@@ -151,7 +164,14 @@ class _SignInState extends State<SignIn> {
                           const BoxConstraints(minWidth: double.infinity),
                       child: CupertinoButton(
                         color: const Color(0xFF2C3E50),
-                        onPressed: () => _signIn(context),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Authcontroller.instance
+                                .signIn(_emailController.text,
+                                    _passwordController.text)
+                                .then((value) => Get.offAll(HomePage()));
+                          }
+                        },
                         child: const Padding(
                           padding: EdgeInsets.all(5.0),
                           child: Text("Sign In"),
@@ -203,13 +223,7 @@ class _SignInState extends State<SignIn> {
                           const BoxConstraints(minWidth: double.infinity),
                       child: CupertinoButton(
                         color: const Color(0xFF2C3E50),
-                        onPressed: () {
-                          signInController.googleSignIn(
-                            _emailController.text,
-                            _passwordController.text,
-                            context,
-                          );
-                        },
+                        onPressed: () {},
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
@@ -266,28 +280,5 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
-  }
-
-  _signIn(BuildContext context) async {
-    User? user = await signInController.signIn(
-      _emailController.text,
-      _passwordController.text,
-      context,
-    );
-
-    // InfoBox(
-    //   "Signed In Successfully",
-    //   context: context,
-    //   infoCategory: InfoCategory.success,
-    // );
-
-    if (user != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-    }
   }
 }
