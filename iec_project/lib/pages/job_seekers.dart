@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:iec_project/controllers/firestore_controller.dart';
 import 'package:iec_project/models/user_model.dart';
-import 'package:http/http.dart' as http;
 
 class JobSeekers extends StatefulWidget {
   const JobSeekers({super.key});
@@ -13,26 +15,9 @@ class JobSeekers extends StatefulWidget {
 
 class _JobSeekersState extends State<JobSeekers> {
   final TextEditingController _searchQueryController = TextEditingController();
+
   bool _isSearching = false;
   String searchQuery = "";
-
-  List<UserModel> userModelLish = [];
-
-  Future<List<UserModel>> getSupport() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-    var data = jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
-      print("got the data");
-      for (Map<String, dynamic> i in data) {
-        userModelLish.add(UserModel.fromJson(i));
-      }
-
-      return userModelLish;
-    } else {
-      return userModelLish;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +38,22 @@ class _JobSeekersState extends State<JobSeekers> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-              child: FutureBuilder(
-                  future: getSupport(),
-                  builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
-                    return ListView.builder(
-                      itemCount: userModelLish.length,
+              child: GetBuilder<FirestoreController>(
+            init: FirestoreController(),
+            initState: (_) {},
+            builder: (controller) {
+              controller.getdata();
+
+              return (controller.isLoading)
+                  ? ListView.builder(
+                      itemCount: controller.seekers.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.blue[200],
-                                borderRadius: BorderRadius.circular(10)),
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(50)),
                             child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: Row(
@@ -72,28 +61,29 @@ class _JobSeekersState extends State<JobSeekers> {
                                     MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CircleAvatar(
-                                      radius: 35,
+                                  Container(
+                                      width: 70,
+                                      height: 70,
                                       child: Image.network(
-                                        "${snapshot.data![index].thumbnailUrl}",
-                                        fit: BoxFit.cover,
-                                      )),
+                                          "${controller.seekers[index].url}")),
                                   Column(
                                     children: [
-                                      const Text(
-                                        "Shahzad Haider",
-                                        style: TextStyle(
+                                      Text(
+                                        "${controller.seekers[index].name}",
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18),
                                       ),
                                       const SizedBox(height: 10),
-                                      const Text("shahzadhaidermari@gmail.com"),
+                                      Text(
+                                          "${controller.seekers[index].email}"),
                                       const SizedBox(height: 10),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text("1y exp"),
+                                          Text(
+                                              "${controller.seekers[index].experience}"),
                                           const Text(
                                             " | ",
                                             style: TextStyle(
@@ -101,7 +91,7 @@ class _JobSeekersState extends State<JobSeekers> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            " Flutter Developer",
+                                            "${controller.seekers[index].skills[0]}",
                                             style: TextStyle(
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.bold,
@@ -117,8 +107,12 @@ class _JobSeekersState extends State<JobSeekers> {
                           ),
                         );
                       },
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }))
+            },
+          ))
         ],
       ),
     ));

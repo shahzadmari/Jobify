@@ -20,28 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<UserModel> userModelLish = [];
   int index = 0;
-  final screens = const [
-    JobSeekers(),
-    Company(),
-    UserProfile(),
-    // ("danish" == "danish") ?
-    Settings()
-  ];
-  Future<List<UserModel>> getSupport() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-    var data = jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
-      print("got the data");
-      for (Map<String, dynamic> i in data) {
-        userModelLish.add(UserModel.fromJson(i));
-      }
-
-      return userModelLish;
-    } else {
-      return userModelLish;
-    }
-  }
+  final screens = const [JobSeekers(), Company(), UserProfile(), Settings()];
 
   @override
   Widget build(BuildContext context) {
