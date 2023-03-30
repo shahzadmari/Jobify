@@ -38,81 +38,21 @@ class _JobSeekersState extends State<JobSeekers> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-              child: GetBuilder<FirestoreController>(
-            init: FirestoreController(),
-            initState: (_) {},
-            builder: (controller) {
-              controller.getdata();
+            child: GetBuilder<FirestoreController>(
+              init: FirestoreController(),
+              initState: (_) {},
+              builder: (controller) {
+                controller.getdata();
 
-              return (controller.isLoading)
-                  ? ListView.builder(
-                      itemCount: controller.seekers.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      width: 70,
-                                      height: 70,
-                                      child: Image.network(
-                                          "${controller.seekers[index].url}")),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "${controller.seekers[index].name}",
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                          "${controller.seekers[index].email}"),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                              "${controller.seekers[index].experience}"),
-                                          const Text(
-                                            " | ",
-                                            style: TextStyle(
-                                                fontSize: 23,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            "${controller.seekers[index].skills[0]}",
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.blue[900]),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    );
-            },
-          ))
+                return ListView.builder(
+                  itemCount: controller.seekers.length,
+                  itemBuilder: (context, index) {
+                    return Text("hel  lo");
+                  },
+                );
+              },
+            ),
+          )
         ],
       ),
     ));
