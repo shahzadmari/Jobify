@@ -9,6 +9,7 @@ import 'package:iec_project/pages/screen_decider.dart';
 import 'package:iec_project/pages/sign_in.dart';
 import 'package:iec_project/pages/splash_screen.dart';
 import 'package:iec_project/pages/user_options.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: JobSeekers(),
       debugShowCheckedModeBanner: false,
     );
     ;
