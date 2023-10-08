@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
@@ -60,4 +57,11 @@ class Seekers {
       if (url != null) "url": url
     };
   }
+}
+
+class Companies {
+  String? bio, contact, email, name, url;
+  bool? category;
+  Companies(
+      {this.bio, this.category, this.contact, this.email, this.name, this.url});
 }

@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:iec_project/models/user_model.dart';
-import 'package:http/http.dart' as http;
-import 'package:iec_project/utils/constants.dart';
+import 'package:iec_project/controllers/companydata_controller.dart';
+
+import 'package:get/get.dart';
 
 class Company extends StatefulWidget {
   const Company({super.key});
@@ -12,88 +11,11 @@ class Company extends StatefulWidget {
 }
 
 class _CompanyState extends State<Company> {
-  List<UserModel> userModelLish = [];
-
-  Future<List<UserModel>> getSupport() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-    var data = jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
-      print("got the data");
-      for (Map<String, dynamic> i in data) {
-        userModelLish.add(UserModel.fromJson(i));
-      }
-
-      return userModelLish;
-    } else {
-      return userModelLish;
-    }
-  }
-
+  CompanyData _companyData = Get.put(CompanyData());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // showInformationDialog(context);
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (ctx) {
-              return Container(
-                padding: const EdgeInsets.all(12.0),
-                height: MediaQuery.of(context).size.height * 0.7,
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const Text(
-                      'Post',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Container(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border:
-                            Border.all(color: Color(0xFFABBAAB), width: 1.0),
-                      ),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: "Start typing...",
-                          border: InputBorder.none,
-                        ),
-                        minLines:
-                            6, // any number you need (It works as the rows for the textarea)
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        cursorColor: const Color(0xFF2C3E50),
-                        cursorWidth: 1.0,
-                      ),
-                    ),
-                    ElevatedButton(
-                      child: const Text('Close BottomSheet'),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        icon: const Icon(Icons.add),
-        label: const Text(
-          'create',
-        ),
-        backgroundColor: ColorConstants.UiColor,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -103,116 +25,114 @@ class _CompanyState extends State<Company> {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              children: const [
-                Text(
-                  'Companies',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Companies',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
             ),
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: TextField(
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[300],
-                          hintText: "Search here",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: BorderSide.none)),
-                    ),
-                  ),
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      size: 30,
-                    ))
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                width: double.infinity,
+                height: 2,
+                color: Colors.grey[300],
+              ),
             ),
             const SizedBox(
               height: 15,
             ),
             Expanded(
-                child: FutureBuilder(
-                    future: getSupport(),
-                    builder:
-                        (context, AsyncSnapshot<List<UserModel>> snapshot) {
-                      return ListView.builder(
-                        itemCount: userModelLish.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        width: 70,
-                                        height: 70,
-                                        child: Image.network(
-                                            "${snapshot.data![index].url}")),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "${snapshot.data![index].id}",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        const Text("nextgen@gmail.com"),
-                                        const SizedBox(height: 10),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Text("2+y exp"),
-                                            const Text(
-                                              " | ",
-                                              style: TextStyle(
-                                                  fontSize: 23,
-                                                  fontWeight: FontWeight.bold),
+                child: GetBuilder<CompanyData>(
+                    init: CompanyData(),
+                    initState: (state) {},
+                    builder: (controller) {
+                      controller.getData();
+
+                      return controller.isloading
+                          ? ListView.builder(
+                              itemCount: controller.companies.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius:
+                                            BorderRadius.circular(50)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: Colors.blue[700],
+                                            radius: 45,
+                                            child: CircleAvatar(
+                                              radius: 42,
+                                              foregroundImage: NetworkImage(
+                                                  controller
+                                                      .companies[index].url
+                                                      .toString()),
                                             ),
-                                            Text(
-                                              " Flutter Developer",
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.blue[900]),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "${controller.companies[index].name}",
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              Text(
+                                                  "${controller.companies[index].email}"),
+                                              const SizedBox(height: 10),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Text("2+y exp"),
+                                                  const Text(
+                                                    " | ",
+                                                    style: TextStyle(
+                                                        fontSize: 23,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    " Flutter Developer",
+                                                    style: TextStyle(
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Colors.blue[900]),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
+                          : Center(child: CircularProgressIndicator());
                     }))
           ],
         ),

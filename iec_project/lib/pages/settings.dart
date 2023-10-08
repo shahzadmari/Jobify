@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
+
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:iec_project/controllers/signOut_controller.dart';
+import 'package:iec_project/controllers/auth_controller.dart';
+
+import 'package:get/get.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Authcontroller auth = Get.put(Authcontroller());
     return Scaffold(
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              SingoutController().SignOut();
+              auth.signOut();
             },
-            child: Text("sign out")),
+            child: const Text("sign out")),
       ),
     );
   }

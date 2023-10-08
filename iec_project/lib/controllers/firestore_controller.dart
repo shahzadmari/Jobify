@@ -1,19 +1,18 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:get/get.dart';
-import 'package:http/http.dart';
+
 import 'package:flutter/material.dart';
 import 'package:iec_project/models/user_model.dart';
-import 'package:iec_project/pages/home_page.dart';
 
 class FirestoreController extends GetxController {
   static FirestoreController instance = Get.find();
   bool isLoading = false;
+
   TextEditingController? nameController,
       bioController,
       skillController,
@@ -24,7 +23,8 @@ class FirestoreController extends GetxController {
   MultiValueDropDownController? mController;
   late FirebaseFirestore reference;
   List<Seekers> seekers = <Seekers>[];
-
+  List<Seekers> searchedSeekers = <Seekers>[];
+  QuerySnapshot? searchresults;
   String? uid;
 
   @override
@@ -39,30 +39,6 @@ class FirestoreController extends GetxController {
     mController = MultiValueDropDownController();
     reference = FirebaseFirestore.instance;
     uid = FirebaseAuth.instance.currentUser!.uid;
-  }
-
-  Future<void> uploadData(String url) async {
-    reference
-        .collection('seekers')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({
-      'name': nameController!.text,
-      'bio': bioController!.text,
-      'experience': expController!.dropDownValue!.name,
-      'email': emailController!.text,
-      'number': contactController!.text,
-      'skills': skills,
-      'url': url
-    }).whenComplete(() {
-      Get.offAll(HomePage());
-      Get.snackbar("data writed", "data is written",
-          snackPosition: SnackPosition.BOTTOM,
-          titleText: Text("data successfully uploaded"),
-          messageText: Text("Data uploaded succcesfully"));
-    }).catchError((onError) {
-      Get.back();
-      Get.snackbar("failed", "failed", messageText: Text(onError.toString()));
-    });
   }
 
   Future<void> getdata() async {
@@ -81,6 +57,28 @@ class FirestoreController extends GetxController {
       }
       isLoading = true;
       update();
+    } catch (e) {
+      Get.snackbar('error', e.toString());
+    }
+  }
+
+  Future<void> searching_Data(String query) async {
+    try {
+      QuerySnapshot words = await reference
+          .collection('seekers')
+          .where("name", isGreaterThanOrEqualTo: query)
+          .get();
+      searchresults = words;
+      for (var users in words.docs) {
+        searchedSeekers.add(Seekers(
+            name: users['name'],
+            bio: users['bio'],
+            experience: users['experience'],
+            skills: users['skills'],
+            email: users['email'],
+            contact: users['number'],
+            url: users['url']));
+      }
     } catch (e) {
       Get.snackbar('error', e.toString());
     }

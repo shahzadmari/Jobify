@@ -40,13 +40,16 @@ dependencies:
   cloud_firestore: ^4.1.0
   firebase_storage: ^11.0.6
 
-  flat_icons_flutter: ^1.0.2
+ 
   animated_text_kit: ^4.2.2
   http: ^0.13.5
   get_storage: ^2.0.3
   dropdown_textfield: ^1.0.6
   image_picker: ^0.8.6
   image_cropper: ^3.0.1
+  get: ^4.6.5
+  uuid: ^4.1.0
+  url_launcher: ^6.1.14
  
 
   

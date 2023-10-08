@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/pages/home_page.dart';
-import 'package:iec_project/pages/sign_in.dart';
 
 class AppRoute {
   // static Route onGenerateRoute(RouteSettings settings) {
@@ -19,9 +18,8 @@ class AppRoute {
   //   }
   // }
 
-  static Route _errorRoute(){
-      return MaterialPageRoute(
-      settings: RouteSettings(name: '/error')
-      ,builder: (_) => HomePage());
+  static Route _errorRoute() {
+    return MaterialPageRoute(
+        settings: RouteSettings(name: '/error'), builder: (_) => HomePage());
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iec_project/pages/sign_up.dart';
 import 'package:iec_project/utils/gradients.dart';
-import 'package:iec_project/utils/info_box.dart';
 
 import 'sign_in.dart';
 

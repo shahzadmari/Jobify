@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+// ignore: must_be_immutable
 class Heading extends StatelessWidget {
   String value;
   Heading({super.key, required this.value});

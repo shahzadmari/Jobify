@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:iec_project/controllers/firestore_controller.dart';
-import 'package:iec_project/models/user_model.dart';
+import 'package:iec_project/pages/seeker_details.dart';
 
 class JobSeekers extends StatefulWidget {
   const JobSeekers({super.key});
@@ -15,7 +13,7 @@ class JobSeekers extends StatefulWidget {
 
 class _JobSeekersState extends State<JobSeekers> {
   final TextEditingController _searchQueryController = TextEditingController();
-
+  final FirestoreController mycontroller = Get.put(FirestoreController());
   bool _isSearching = false;
   String searchQuery = "";
 
@@ -23,37 +21,144 @@ class _JobSeekersState extends State<JobSeekers> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: _isSearching ? _buildSearchField() : _buildTitle(context),
-        elevation: 0.0,
-        titleSpacing: 0.0,
-        leading: _isSearching ? const BackButton(color: Colors.black) : null,
-        actions: _buildActions(),
-        backgroundColor: Colors.white,
-        actionsIconTheme: const IconThemeData(color: Colors.black),
-        automaticallyImplyLeading: false,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: GetBuilder<FirestoreController>(
-              init: FirestoreController(),
-              initState: (_) {},
-              builder: (controller) {
-                controller.getdata();
-
-                return ListView.builder(
-                  itemCount: controller.seekers.length,
-                  itemBuilder: (context, index) {
-                    return Text("hel  lo");
-                  },
-                );
-              },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Job Seekers',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          )
-        ],
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                width: double.infinity,
+                height: 2,
+                color: Colors.grey[300],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: GetBuilder<FirestoreController>(
+                init: FirestoreController(),
+                initState: (_) {},
+                builder: (controller) {
+                  controller.getdata();
+
+                  return controller.isLoading
+                      ? ListView.builder(
+                          itemCount: controller.seekers.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(SeekerDetails(), arguments: [
+                                    {"url": controller.seekers[index].url},
+                                    {"name": controller.seekers[index].name},
+                                    {"email": controller.seekers[index].email},
+                                    {"bio": controller.seekers[index].bio},
+                                    {
+                                      "skills": controller.seekers[index].skills
+                                    },
+                                    {
+                                      "exp":
+                                          controller.seekers[index].experience
+                                    },
+                                    {
+                                      "contact":
+                                          controller.seekers[index].contact
+                                    },
+                                  ]);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor: Colors.blue[700],
+                                          radius: 45,
+                                          child: CircleAvatar(
+                                            radius: 42,
+                                            foregroundImage: NetworkImage(
+                                                controller.seekers[index].url
+                                                    .toString()),
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "${controller.seekers[index].name}",
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                                "${controller.seekers[index].email}"),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    "${controller.seekers[index].experience} exp"),
+                                                const Text(
+                                                  " | ",
+                                                  style: TextStyle(
+                                                      fontSize: 23,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  " skills sets",
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.blue[900]),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : Center(child: CircularProgressIndicator());
+                },
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }
@@ -95,6 +200,8 @@ class _JobSeekersState extends State<JobSeekers> {
       ),
       style: const TextStyle(color: Colors.black, fontSize: 20.0),
       onChanged: (query) => updateSearchQuery(query),
+      onSubmitted: (value) =>
+          FirestoreController.instance.searching_Data(value),
     );
   }
 

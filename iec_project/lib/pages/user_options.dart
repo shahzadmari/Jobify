@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:iec_project/Widgets/user_optionCards.dart';
-import 'package:iec_project/pages/company_posts.dart';
-import 'package:iec_project/pages/home_page.dart';
-import 'package:iec_project/pages/job_seekers.dart';
+import 'package:iec_project/pages/company_bio.dart';
+
 import 'package:iec_project/pages/seeker_bio.dart';
-import 'package:iec_project/pages/sign_in.dart';
+
 import 'package:iec_project/utils/gradients.dart';
 
 class UserOptions extends StatelessWidget {
@@ -25,7 +23,7 @@ class UserOptions extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Are you a new user? what's on your mind?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -34,23 +32,23 @@ class UserOptions extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               UserCards(
                 text: "Want to Hire people for your organization?",
                 icon: CupertinoIcons.building_2_fill,
-                WidgetPage: SignIn(),
+                WidgetPage: const CompanyBio(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               UserCards(
                 text: "Looking for a job? what are you waiting for?",
                 icon: CupertinoIcons.search_circle_fill,
-                WidgetPage: SeekerBio(),
+                WidgetPage: const SeekerBio(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],
