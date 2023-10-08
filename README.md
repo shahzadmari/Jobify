@@ -9,7 +9,7 @@
 
 ## User Identification Screens :
 #### Here after signing up the user will be asked whether he is searching for a job or want to hire a people. According to that users have to provide data to the app.
-![userProfile](https://github.com/shahzadmari/DSA_Lab/assets/92587193/08e31698-6f71-4e4d-be67-fd3a29d4870d)
+![useroption](https://github.com/shahzadmari/Jobify/assets/92587193/0677c962-9681-44bc-a85b-22915bea8d7e)
 ![combio](https://github.com/shahzadmari/DSA_Lab/assets/92587193/611002c7-1c38-402e-bfbd-0e9e892f75be)
 
 ## Application's Home Page :
