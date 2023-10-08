@@ -4,15 +4,20 @@
 # Project Snapshots :
 
 ## Initial Sign up and Introduction Screens:
-![signup](https://github.com/shahzadmari/DSA_Lab/assets/92587193/48b25c28-f916-454a-9fed-2701096a11c9)      "                         "      ![regsiteraiton](https://github.com/shahzadmari/Jobify/assets/92587193/612770cf-5087-491c-a19f-02e22162e6db)
+![signup](https://github.com/shahzadmari/DSA_Lab/assets/92587193/48b25c28-f916-454a-9fed-2701096a11c9) 
+![regsiteraiton](https://github.com/shahzadmari/DSA_Lab/assets/92587193/d986891a-72da-4e83-9e40-f0cc04e21cab)
 
 ## User Identification Screens :
 #### Here after signing up the user will be asked whether he is searching for a job or want to hire a people. According to that users have to provide data to the app.
-![useroption](https://github.com/shahzadmari/Jobify/assets/92587193/9487312a-5c1e-4aa5-b3a2-088e8fc7e4df) " " ![combio](https://github.com/shahzadmari/Jobify/assets/92587193/0be65d85-8950-4139-907f-f95a008cec1b)
+![userProfile](https://github.com/shahzadmari/DSA_Lab/assets/92587193/08e31698-6f71-4e4d-be67-fd3a29d4870d)
+![combio](https://github.com/shahzadmari/DSA_Lab/assets/92587193/611002c7-1c38-402e-bfbd-0e9e892f75be)
 
 ## Application's Home Page :
 #### here is the homepage when user is successfully uploaded his bio data and information in our App. The Homepage contains bottom Navigation bar with 5 Screens, Job Seekers , companies , Company Posts, User Profile and at the end Settings options Respectively.
-![jobseekers](https://github.com/shahzadmari/Jobify/assets/92587193/62bafadb-bc5b-4b1e-a8ba-54970cc737b9) "    " ![companies](https://github.com/shahzadmari/Jobify/assets/92587193/f0d1d68a-e5e5-4b66-b10f-4709ccde1f36) ![posts](https://github.com/shahzadmari/Jobify/assets/92587193/2001f610-e97d-4fb5-a3e8-ca8ee720da6b) " "![userProfile](https://github.com/shahzadmari/Jobify/assets/92587193/6dc7a9e2-caa7-4a6b-b37b-0d7d41322968)
+![jobseekers](https://github.com/shahzadmari/DSA_Lab/assets/92587193/9b942052-df64-482f-a003-802bd9dc4217)
+![companies](https://github.com/shahzadmari/DSA_Lab/assets/92587193/f740b85d-5eb4-41f5-b931-99dd835fac71)
+![posts](https://github.com/shahzadmari/DSA_Lab/assets/92587193/4371b952-e680-4c93-8c89-ee8639960d2b)
+![profile](https://github.com/shahzadmari/DSA_Lab/assets/92587193/228b1148-00b9-449f-8f2d-cc1f21d9a9e2)
 
 #### So these are the screens in the homepage of application 
 
