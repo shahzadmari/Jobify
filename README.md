@@ -21,17 +21,6 @@
 
 #### So these are the screens in the homepage of application 
 
-
-# Group members :
-- ### Shahzad Haider (20SW067)
-- ### Aashir Ali (20SW023)
-
-# Submitted to :
-  ### Ma'am Marium Memon
-
- # University :
- ### Mehran University of Engineering and Technology, Jamshoro
-
 # Technologies 
 - ### Flutter 
 - ### Firebase
